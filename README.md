@@ -129,3 +129,25 @@ serve -s build
 rm -r force node_modules
 rm package-lock.json
 ```
+
+<br>
+
+# XML
+```xml
+<Person name="Jack" age="32"/>
+```
+
+<br>
+
+# 가상 DOM
+- 물리 DOM : JS만 사용하는 프런트엔트 개발
+- 가상 DOM : React를 사용하는 프런트엔트 개발
+```typescript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const pVirtualDOM = React.createElement('p', null, 'Hello virtual DOM world!')
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+root.render(pVirtualDOM)
+```
