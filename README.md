@@ -232,3 +232,33 @@ root.render(rootVirtualDOM)
 <br>
 
 # 컴포넌트
+- 리액트 컴포넌트
+  + JSX 문에서 HTML 태그처럼 쓰는 문장은 HTML태그가 아니라 리액트 프레임워크가 제공하는 컴포넌트임
+```tsx
+// h1 컴포넌트
+const h1 = <h1>Hello world!</h1>
+```
+- 사용자 컴포넌트
+  + 복잡한 JSX 부분을 새로운 컴포넌트로 구현해 단순화
+```jsx
+// App.tsx
+export default function App() {
+  return (
+    <ul>
+      <li>
+        <a href="http://www.google.com">
+          <p>go to Google</p>
+        </a>
+      </li>
+    </ul>
+  )
+}
+```
+```tsx
+// index.tsx
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+const  root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(<App />)
+```
