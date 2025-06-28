@@ -77,7 +77,7 @@ ts-node src/index.ts
 
 - 프리티어 설정
 > setting.json에 다음 내용 추가
-> ```js
+> ```tsx
 > {
 >   "editor.defaultFormatter": "esbenp.prettier-vscode",
 >   "editor.formatOnSave": true,
@@ -92,7 +92,7 @@ ts-node src/index.ts
 ```powershell
 touch .prettierrc.js
 ```
-```js
+```tsx
 module.exports = {
   singleQuote: true,
   semi: false,
@@ -142,7 +142,7 @@ rm package-lock.json
 # 가상 DOM
 - 물리 DOM : JS만 사용하는 프런트엔트 개발
 - 가상 DOM : React를 사용하는 프런트엔트 개발
-```typescript
+```tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
@@ -151,3 +151,84 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(pVirtualDOM)
 ```
+
+<br>
+
+# JSX
+- Javascript + XML의 줄임말
+- React.createElement 호출 코드를 간결하게 해줌
+<br>
+
+- 리액트만으로 구현
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const CE = React.createElement
+
+const rootVirtualDOM = CE('ul', null, [
+  CE('li', null, [
+    CE('a', {href: 'http://www.google.com', target: '_blank'}, [
+      CE('p', null, 'go to google')
+    ])
+  ])
+])
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(rootVirtualDOM)
+```
+- JSX로 구현
+```tsx
+import ReactDOM from 'react-dom/client'
+
+const rootVirtualDOM = (
+  <ul>
+    <li>
+      <a href="http://www.google.com" target="_blank">
+        <p>go to Google</p>
+      </a>
+    </li>
+  </ul>
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(rootVirtualDOM)
+```
+<br>
+
+- JSX에서는 반드시 스스로 닫는 태그 형태를 지켜야함
+```tsx
+// 그냥 HTML처럼 쓰면 오류 발생
+<input type="text">
+<img src="URL">
+```
+```tsx
+// 스스로 닫는 태그 사용
+<input type="text"/>
+<img src="URL"/>
+```
+
+- 표현식 (중괄호)
+  + XML에 JS코드 삽입
+  + `return` 없이 값을 반환
+```tsx
+const hello = 'Hello world!'
+<p>{hello}</p>
+```
+
+- JSX 구문은 React.createElement의 변형이므로 변수나 배열에 저장 가능
+```tsx
+import ReactDOM from 'react-dom/client'
+
+const children = [0, 1, 2].map((n: number) => <h3>Hello world! {n}</h3>)
+const rootVirtualDOM = <div>{children}</div>
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(rootVirtualDOM)
+```
+> 실행결과
+> <br>
+> ![image](https://github.com/user-attachments/assets/aa86f8b9-a123-469e-a8a8-52a08e1a777e)
+
+<br>
+
+# 컴포넌트
