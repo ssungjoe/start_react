@@ -262,3 +262,88 @@ import App from './App'
 const  root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(<App />)
 ```
+- 클래스 컴포넌트
+  + `react` 패키지에서 `Component` 클래스 상속
+  + `Component`를 상속한 클래스 컴포넌트는 반드시 가상 DOM 객체를 반환하는 `render` 메서드 포함해야함
+```tsx
+import React, {Component} from 'react'
+export default class App extends Component {
+  render() { return null }
+}
+```
+> 사용자 컴포넌트를 쓰는 또 다른 이유
+> - typescript 코드와 JSX 구문을 함께 쓸 수 있음
+> ```tsx
+> // ClassComponent.tsx
+> import {Component} from 'react'
+> 
+> export default class ClassComponent extends Component {
+>   render() {
+>     const isLoading = false
+>     const children = isLoading ? (
+>       <p>loading...</p>
+>     ) : (
+>       <li>
+>         <a href="http://www.google.com">
+>           <p>go to Google</p>
+>         </a>
+>       </li>
+>     )
+>     return <div>{children}</div>
+>   }
+> }
+> ```
+> ```tsx
+> // App.tsx
+> import {Component} from 'react'
+> import {ClassComponent} from './ClassComponent'
+>
+> export default class ClassComponent extends Component {
+>   render() {
+>     return (
+>       <ul>
+>         <ClassComponent />
+>         <ClassComponent />
+>       </ul>
+>     )
+>   }
+> }
+> ```
+
+- ClassComponent에 property 구현
+```tsx
+// ClassComponent.tsx
+import {Component} from 'react'
+
+export type ClassComponentProps = {
+  href: string
+  text: string
+}
+export default class ClassComponent extends Component<ClassComponentProps> {
+  render() {
+    const {href, text} = this.props
+    return (
+      <li>
+        <a href={href}>
+          <p>{text}</p>
+        </a>
+      </li>
+    )
+  }
+}
+```
+```tsx
+import {Component} from 'react'
+import {ClassComponent} from './ClassComponent'
+
+export default class App extends Component {
+  render() {
+    return (
+      <ul>
+        <ClassComponent href="http://www.google.com" text="go to Google" />
+        <ClassComponent href="http://www.naver.com" text="go to Naver" />
+      </ul>
+    )
+  }
+}
+```
