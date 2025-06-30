@@ -296,7 +296,7 @@ export default class App extends Component {
 > ```tsx
 > // App.tsx
 > import {Component} from 'react'
-> import {ClassComponent} from './ClassComponent'
+> import ClassComponent from './ClassComponent'
 >
 > export default class ClassComponent extends Component {
 >   render() {
@@ -333,8 +333,9 @@ export default class ClassComponent extends Component<ClassComponentProps> {
 }
 ```
 ```tsx
+// App.tsx
 import {Component} from 'react'
-import {ClassComponent} from './ClassComponent'
+import ClassComponent from './ClassComponent'
 
 export default class App extends Component {
   render() {
