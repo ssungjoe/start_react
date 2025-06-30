@@ -348,3 +348,19 @@ export default class App extends Component {
   }
 }
 ```
+
+- 함수형 컴포넌트
+  + 클래식 방식 컴포넌트보다 더욱 간결, 선호도 높음
+```tsx
+// App.tsx
+export default function App() {
+  return <div>Hello World!</div>
+}
+```
+```tsx
+// 또는
+const App = () => {
+  return <h1>Function component</h1>
+}
+export default App
+```
